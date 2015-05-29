@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-CATS = %w(breakfast earl curie markov gizmo kiki sally)
+CATS = %w(breakfast earl curie markov gizmo kiki sally break bro breakfastine)
 
 CATS.each do |cat|
   u = User.create!(username: cat, password: "#{cat}#{cat}")

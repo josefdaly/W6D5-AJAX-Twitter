@@ -1,18 +1,19 @@
-$.FollowToggle = function (el) {
+$.FollowToggle = function (el, options) {
   this.$el = $(el);
-  this.userId = $('.follow-toggle').data('user-id');
-  this.followState = $('.follow-toggle').data('initial-follow-state');
+  this.userId = this.$el.data('user-id') || options.userId;
+  this.followState = this.$el.data('initial-follow-state')
+                                                        || options.followState;
   this.render();
   var that = this;
-  $('.follow-toggle').on( 'click', this.handleClick.bind(that) );
+  this.$el.on( 'click', this.handleClick.bind(that) );
 };
 
 $.FollowToggle.prototype.render = function () {
   if ( this.followState === "unfollowed" ) {
     //jquery button and insert value as follow
-    $(".follow-toggle").text("Follow!");
+    this.$el.text("Follow!");
   } else if ( this.followState === 'followed') {
-    $(".follow-toggle").text("Unfollow!");
+    this.$el.text("Unfollow!");
   }
 };
 
@@ -38,16 +39,16 @@ $.FollowToggle.prototype.handleClick = function (event) {
         var newButtonText = 'Unfollow!';
       }
 
-      $('button.follow-toggle').empty();
-      $('.follow-toggle').text(newButtonText);
+      that.$el.empty();
+      that.$el.text(newButtonText);
     }
   });
 
 };
 
-$.fn.followToggle = function () {
+$.fn.followToggle = function (options) {
   return this.each(function () {
-    new $.FollowToggle(this);
+    new $.FollowToggle(this, options);
   });
 };
 
